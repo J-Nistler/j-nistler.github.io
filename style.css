@@ -1,0 +1,12 @@
+
+
+:root {
+    --color: #aaa;
+    --background: #000;
+    --size: 1.2;
+    /* --glow: 1 */
+    --animation: terminal-blink;
+}
+.command, .directory {
+    cursor: pointer;
+}
