@@ -23,22 +23,31 @@ const directories = {
         '',
         '<white>experience</white>',
         '* Senior Systems Librarian / Systems Program Manager <yellow>U.S. Department of State</yellow> 2021-Present',
-        '* Electronic Resources Librarian / Content Management Systems Librarian<yellow>Northern Virginia Community College</yellow> 2020-2021',
-        '* Reference and Instruction Librarian <yellow>Northern Virginia Community College</yellow> 2019-2020',
-        '* Associate of Arts in Arabic <green>Defense Language Instutite Foriegn Language Center</green> 2010-2012',
+        '* Electronic Resources Librarian / Content Management Systems Librarian <yellow>Northern Virginia Community College</yellow> 2019-2021',
+        '* Reference and Instruction Librarian <yellow>Northern Virginia Community College</yellow> 2019',
+        '* Archives Intern <yellow>Special Collections Research Center, George Mason University</yellow> 2019',
+        '* Research Liaison <yellow>United States Department of Agriculture, Forest Service</yellow> 2019',
+        '* Project Archivist <yellow>University of Utah, J. Willard Marriott Library</yellow> 2018',
+        '* Preservation & Digital Access Technician <yellow>University of Utah, J. Willard Marriott Library</yellow> 2016-2017',
+        '* Operation Manager/Analyst, Signals Intelligence <yellow>United States Army, Signals Intelligence/Arabic Crypto-Linguistics</yellow> 2010-2016',
         ''
     ],
     projects: [
         '',
-        '<white>Open Source projects</white>',
+        '<white>projects</white>',
         [
-            ['jQuery Terminal',
-             'https://terminal.jcubic.pl',
-             'library that adds terminal interface to websites'
+            ['2019 - A Quantitative Approach to the Magnetic Media Crisis',
+             'https://github.com/J-Nistler/quant_magnetic_media',
+             'Skills used: Git, HTML, Markdown, R Markdown, Quantitative/Qualitative Research Methods'
             ],
-            ['LIPS Scheme','https://lips.js.org', 'Scheme implementation in JavaScript'],
-            ['Sysend.js','https://jcu.bi/sysend', 'Communication between open tabs'],
-            ['Wayne','https://jcu.bi/wayne', 'Pure in browser HTTP requests'],
+            ['2019 - Iraq in European Newspaper Editorials 1991-2013',
+                'https://bit.ly/Iraq-StoryMap', 
+                'Skills used: Gale Digital Scholarship Lab, Voyant, Text Mining, Primary Research, Data Analysis'
+            ],
+            ['2018 - Audio Visual Survey Tool (AVST)',
+                'https://github.com/J-Nistler/AVST-Database-Application', 
+                'Skills used: Microsoft Access, Visual Basic, SQL'
+            ]
         ].map(([name, url, description = '']) => {
             return `* <a href="${url}">${name}</a> &mdash; <white>${description}</white>`;
         }),
@@ -46,32 +55,54 @@ const directories = {
     ].flat(),
     skills: [
         '',
-        '<white>languages</white>',
-
+        '<white>Library Systems Management and Administration</white>',
         [
-            'JavaScript',
-            'TypeScript',
-            'Python',
-            'SQL',
-            'PHP',
-            'Bash'
-        ].map(lang => `* <yellow>${lang}</yellow>`),
+            '<yellow>Integrated Library Systems(ILS):</yellow> OCLC WorldShare Management System (WMS); Ex Libris Alma/Primo',
+            '<yellow>Customer Relationship Management (CRM):</yellow> Salesforce – Library Support Application Administrator',
+            '<yellow>Content Management System (CMS):</yellow> SpringShare Suite (LibGuides, LibWizard, LibCal, etc.); Confluence',
+            '<yellow>Digital Asset Management Systems (DAM):</yellow> Omeka Classic; OCLC ContentDM',
+            '<yellow>System Migrations:</yellow> Elimination of Technical Debt; ContentDM to Omeka; Wiki to OneNote; Local to Cloud'
+        ],
         '',
-        '<white>libraries</white>',
+        '<white>Library Web Administration and Knowledge Management</white>',
         [
-            'React.js',
-            'Redux',
-            'Jest',
-        ].map(lib => `* <green>${lib}</green>`),
+            '<orange>Web Platforms:</orange> Microsoft SharePoint; SpringShare CMS; WordPress; Wikipedia/MediaWiki',
+            '<orange>Front-End Development:</orange> HTML; CSS/SASS/SCSS; JavaScript; Bootstrap; jQuery; Tailwind CSS',
+            '<orange>Back-End Development:</orange> Django Web Framework; Application Programming Interface (APIs), SQL',
+            '<orange>Identity and Access Management:</orange> Okta; EZProxy; Authelia; Nginx; Secure Web Application Gateway (SWAG)'
+        ],
         '',
-        '<white>tools</white>',
+        '<white>Leadership and Program/Project Management</white>',
         [
-            'Docker',
-            'git',
-            'GNU/Linux'
-        ].map(lib => `* <blue>${lib}</blue>`),
+            '<blue>Project Management:</blue> Waterfall Project Management; Agile Project Management',
+            '<blue>Workflow/Process Automation:</blue> Python; Windows PowerShell; OpenRefine; PowerQuery; PowerAutomate; SUSHI'
+        ],
+        '',
+        '<white>Communication and Collaboration</white>',
+        [
+            '<green>Team Collaboration:</green> Oral and Written Technical Communication; Team Building; Zoom; Slack; Microsoft Teams',
+            '<green>Technical Communication:</green> Technical Webinars; Process/Workflow Documentation; Change Management',
+            '<green>Remote Work:</green> Collaboration via Work from Home; Building Virtual Staff Spaces/Intranets; Virtual Engagement'
+        ],
         ''
-    ].flat()
+    ].flat(),
+    publications: [
+        '',
+        '<white>publications</white>',
+        '* 2020 - Nistler, Jared and Ketchley, Sarah. “Developing Literacies in the Digital Humanities Classroom: A Case Study.”',
+        'Literacies in a Digital Humanities Context, special issue of dh+lib, 2020, pp. 24-31.',
+        '* 2018 - Nistler, Jared. “No One Needs to Know My War Stories.”',
+        'Undergraduate Journal of Contemporary Issues and Media, vol. 3, 2021, pp. 38-42. (written in 2018, published in 2021).',
+        ''
+    ],
+        awards: [
+        '',
+        '<white>awards</white>',
+        '* 2025 – 2024 Federal Librarian of the Year, Library of Congress via FEDLINK',
+        '* 2024 – Superior Honor Award, U.S. Department of State',
+        '* 2023 – Meritorious Honor Award, U.S. Department of State',
+        ''
+    ],
 };
 
 const dirs = Object.keys(directories);
@@ -86,8 +117,7 @@ const server = 'jnistler.dev';
 // we picked those three that works more like real programs
 const files = [
     'joke',
-    'credits',
-    'record'
+    'credits'
 ];
 
 function prompt() {
@@ -187,25 +217,14 @@ const commands = {
             '* <a href="https://github.com/jcubic/isomorphic-lolcat">Isomorphic Lolcat</a>',
             '* <a href="https://jokeapi.dev/">Joke API</a>',
             '',
-            '<a href="https://github.com/sponsors/jcubic">Sponsor ❤️ my Open Source work</a>',
+            'This site was created by totally ripping off the work of <a href="https://github.com/jcubic">jcubic a.k.a. Jakub T. Jankiewicz</a>',
+            'Thank you! Your work is so cool!',
             ''
         ].join('\n');
     },
     echo(...args) {
         if (args.length > 0) {
             term.echo(args.join(' '));
-        }
-    },
-    record(arg) {
-        if (arg === 'start') {
-            term.history_state(true);
-        } else if (arg === 'stop') {
-            term.history_state(false);
-        } else {
-            term.echo('save commands in url hash so you can share the link\n\n' +
-                      'usage: record [stop|start]\n');
-            term.echo('<white>NOTE</white>: this command will not work on CodePen,' +
-                     ' becuase it use an iframe!');
         }
     }
 };
