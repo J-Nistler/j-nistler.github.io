@@ -98,6 +98,7 @@ const directories = {
         awards: [
         '',
         '<white>awards</white>',
+        '* 2025 – Superior Honor Award, U.S. Department of State',
         '* 2025 – 2024 Federal Librarian of the Year, Library of Congress via FEDLINK',
         '* 2024 – Superior Honor Award, U.S. Department of State',
         '* 2023 – Meritorious Honor Award, U.S. Department of State',
@@ -286,8 +287,10 @@ term.on('click', '.directory', function() {
 
 function ready() {
     const seed = rand(256);
-    term.echo(() => rainbow(render('Jared Nistler'), seed))
-        .echo('<white>Systems Librarian | Full Stack Web Developer | Open Source Software Advocate</white>\n').resume();
+    term.echo('<white>Systems Librarian | Full Stack Web Developer | Open Source Software Advocate</white>\n').resume()
+        .echo(() => rainbow(render('Jared Nistler'), seed))
+        .echo('')
+        .echo('');
 }
 
 function rainbow(string, seed) {
