@@ -1,7 +1,7 @@
 
 const font = 'Slant';
 
-figlet.defaults({ fontPath: 'https://cdn.jsdelivr.net/npm/figlet/fonts' });
+figlet.defaults({ fontPath: 'https://cdn.jsdelivr.net/npm/figlet@1.8.2/fonts' });
 figlet.preloadFonts([font], ready);
 
 const formatter = new Intl.ListFormat('en', {
@@ -16,7 +16,7 @@ const directories = {
         '* Certified Full Stack Web Developer <orange> PDX Code Guild (Bootcamp)</orange> 2021',
         '* Master of Library and Information Science (MLIS) <purple>University of Washington</purple> 2018-2020',
         '* Bachelor of International Studies <red>University of Utah</red> 2016-2018',
-        '* Associate of Arts in Arabic <green>Defense Language Instutite Foriegn Language Center</green> 2010-2012',
+        '* Associate of Arts in Arabic <green>Defense Language Institute Foreign Language Center</green> 2010-2012',
         ''
     ],
     experience: [
@@ -95,7 +95,7 @@ const directories = {
         'Undergraduate Journal of Contemporary Issues and Media, vol. 3, 2021, pp. 38-42. (written in 2018, published in 2021).',
         ''
     ],
-        awards: [
+    awards: [
         '',
         '<white>awards</white>',
         '* 2025 – Superior Honor Award, U.S. Department of State',
@@ -114,8 +114,7 @@ let cwd = root;
 const user = 'guest';
 const server = 'jnistler.dev';
 
-// not every command needs to be binary
-// we picked those three that works more like real programs
+// commands listed next to the directories in the home listing
 const files = [
     'joke',
     'credits'
@@ -149,7 +148,11 @@ const commands = {
                     this.error('Invalid directory');
                 } else {
                     const dir = dirs[0];
-                    this.echo(directories[dir].join('\n'));
+                    if (dir in directories) {
+                        this.echo(directories[dir].join('\n'));
+                    } else {
+                        this.error('Invalid directory');
+                    }
                 }
             } else if (cwd === root) {
                 if (dir in directories) {
@@ -171,8 +174,14 @@ const commands = {
     },
     async joke() {
         // we use programming jokes so it fit better developer portfolio
-        const res = await fetch('https://v2.jokeapi.dev/joke/Programming');
-        const data = await res.json();
+        let data;
+        try {
+            const res = await fetch('https://v2.jokeapi.dev/joke/Programming');
+            data = await res.json();
+        } catch (e) {
+            this.error('Could not reach the joke server. Try again later.');
+            return;
+        }
         if (data.type == 'twopart') {
             // this allow to create sequence of typing animations
             this.animation(async () => {
@@ -196,7 +205,7 @@ const commands = {
         }
     },
     cd(dir = null) {
-        if (dir === null || (dir === '..' && cwd !== root)) {
+        if (dir === null || dir === '..' || dir.match(/^~\/?$/)) {
             cwd = root;
         } else if (dir.startsWith('~/') && dirs.includes(dir.substring(2))) {
             cwd = dir;
@@ -235,7 +244,7 @@ const command_list = ['clear'].concat(Object.keys(commands));
 const formatted_list = command_list.map(cmd => `<white class="command">${cmd}</white>`);
 const help = formatter.format(formatted_list);
 
-const re = new RegExp(`^\s*(${command_list.join('|')})(\s?.*)`);
+const re = new RegExp(`^\\s*(${command_list.join('|')})(\\s?.*)`);
 
 $.terminal.new_formatter([re, function(_, command, args) {
     return `<white class="command">${command}</white><aquamarine>${args}</aquamarine>`;
@@ -251,8 +260,6 @@ $.terminal.xml_formatter.tags.green = (attrs) => {
 const term = $('body').terminal(commands, {
     greetings: false,
     checkArity: false,
-    // terminal should be disabled when running in CodePen preview
-    enabled: $('body').attr('onload') === undefined,
     completion(string) {
         // in every function we can use this to reference term object
         const { name, rest } = $.terminal.parse_command(this.get_command());
@@ -323,4 +330,3 @@ function hex(color) {
     }).join('');
 }
 
-github('jcubic/jquery.terminal');
