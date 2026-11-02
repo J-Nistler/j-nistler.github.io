@@ -61,9 +61,13 @@
 </head>
 <body>
 <!--
-  Plain-HTML copy of the terminal content. Search engines and screen readers
-  read this; it is visually hidden once the terminal loads. Keep it in sync
-  with the directories in my-terminal.js.
+  Site content. The terminal (my-terminal.js) builds its directories from
+  this markup, and search engines and screen readers read it directly. It is
+  visually hidden once the terminal loads.
+
+  - Each <section id="..."> becomes a terminal directory with that name.
+  - <h1> is the ASCII-art banner; the <header> paragraph is the tagline.
+  - data-color="..." colors that text in the terminal.
 -->
 <main id="profile">
   <header>
@@ -71,84 +75,84 @@
     <p>Senior Systems Librarian | Full Stack Web Developer | Open Source Software Advocate</p>
   </header>
 
-  <section>
+  <section id="experience">
     <h2>Experience</h2>
     <ul>
-      <li>Senior Systems Librarian / Systems Program Manager, U.S. Department of State, 2021–present</li>
-      <li>Electronic Resources Librarian / Content Management Systems Librarian, Northern Virginia Community College, 2019–2021</li>
-      <li>Reference and Instruction Librarian, Northern Virginia Community College, 2019</li>
-      <li>Archives Intern, Special Collections Research Center, George Mason University, 2019</li>
-      <li>Research Liaison, United States Department of Agriculture, Forest Service, 2019</li>
-      <li>Project Archivist, University of Utah, J. Willard Marriott Library, 2018</li>
-      <li>Preservation &amp; Digital Access Technician, University of Utah, J. Willard Marriott Library, 2016–2017</li>
-      <li>Operation Manager/Analyst, Signals Intelligence, United States Army, Signals Intelligence/Arabic Crypto-Linguistics, 2010–2016</li>
+      <li>Senior Systems Librarian / Systems Program Manager, <span data-color="yellow">U.S. Department of State</span>, 2021–present</li>
+      <li>Electronic Resources Librarian / Content Management Systems Librarian, <span data-color="yellow">Northern Virginia Community College</span>, 2019–2021</li>
+      <li>Reference and Instruction Librarian, <span data-color="yellow">Northern Virginia Community College</span>, 2019</li>
+      <li>Archives Intern, <span data-color="yellow">Special Collections Research Center, George Mason University</span>, 2019</li>
+      <li>Research Liaison, <span data-color="yellow">United States Department of Agriculture, Forest Service</span>, 2019</li>
+      <li>Project Archivist, <span data-color="yellow">University of Utah, J. Willard Marriott Library</span>, 2018</li>
+      <li>Preservation &amp; Digital Access Technician, <span data-color="yellow">University of Utah, J. Willard Marriott Library</span>, 2016–2017</li>
+      <li>Operation Manager/Analyst, Signals Intelligence, <span data-color="yellow">United States Army, Signals Intelligence/Arabic Crypto-Linguistics</span>, 2010–2016</li>
     </ul>
   </section>
 
-  <section>
+  <section id="awards">
     <h2>Awards</h2>
     <ul>
-      <li>2025 – Superior Honor Award, U.S. Department of State</li>
-      <li>2025 – 2024 Federal Librarian of the Year, Library of Congress via FEDLINK</li>
-      <li>2024 – Superior Honor Award, U.S. Department of State</li>
-      <li>2023 – Meritorious Honor Award, U.S. Department of State</li>
+      <li>2025 – Superior Honor Award, <span data-color="yellow">U.S. Department of State</span></li>
+      <li>2025 – 2024 Federal Librarian of the Year, <span data-color="yellow">Library of Congress via FEDLINK</span></li>
+      <li>2024 – Superior Honor Award, <span data-color="yellow">U.S. Department of State</span></li>
+      <li>2023 – Meritorious Honor Award, <span data-color="yellow">U.S. Department of State</span></li>
     </ul>
   </section>
 
-  <section>
+  <section id="education">
     <h2>Education</h2>
     <ul>
-      <li>Master of Library and Information Science (MLIS), University of Washington, 2018–2020</li>
-      <li>Bachelor of International Studies, University of Utah, 2016–2018</li>
-      <li>Associate of Arts in Arabic, Defense Language Institute Foreign Language Center, 2010–2012</li>
-      <li>Certified Full Stack Web Developer, PDX Code Guild (Bootcamp), 2021</li>
+      <li>Master of Library and Information Science (MLIS), <span data-color="purple">University of Washington</span>, 2018–2020</li>
+      <li>Bachelor of International Studies, <span data-color="red">University of Utah</span>, 2016–2018</li>
+      <li>Associate of Arts in Arabic, <span data-color="green">Defense Language Institute Foreign Language Center</span>, 2010–2012</li>
+      <li>Certified Full Stack Web Developer, <span data-color="orange">PDX Code Guild (Bootcamp)</span>, 2021</li>
     </ul>
   </section>
 
-  <section>
+  <section id="skills">
     <h2>Skills</h2>
     <h3>Library systems management and administration</h3>
     <ul>
-      <li>Integrated Library Systems (ILS): OCLC WorldShare Management System (WMS); Ex Libris Alma/Primo</li>
-      <li>Customer Relationship Management (CRM): Salesforce – Library Support Application Administrator</li>
-      <li>Content Management System (CMS): SpringShare Suite (LibGuides, LibWizard, LibCal, etc.); Confluence</li>
-      <li>Digital Asset Management Systems (DAM): Omeka Classic; OCLC ContentDM</li>
-      <li>System Migrations: Elimination of Technical Debt; ContentDM to Omeka; Wiki to OneNote; Local to Cloud</li>
+      <li><span data-color="yellow">Integrated Library Systems (ILS):</span> OCLC WorldShare Management System (WMS); Ex Libris Alma/Primo</li>
+      <li><span data-color="yellow">Customer Relationship Management (CRM):</span> Salesforce – Library Support Application Administrator</li>
+      <li><span data-color="yellow">Content Management System (CMS):</span> SpringShare Suite (LibGuides, LibWizard, LibCal, etc.); Confluence</li>
+      <li><span data-color="yellow">Digital Asset Management Systems (DAM):</span> Omeka Classic; OCLC ContentDM</li>
+      <li><span data-color="yellow">System Migrations:</span> Elimination of Technical Debt; ContentDM to Omeka; Wiki to OneNote; Local to Cloud</li>
     </ul>
     <h3>Library web administration and knowledge management</h3>
     <ul>
-      <li>Web Platforms: Microsoft SharePoint; SpringShare CMS; WordPress; Wikipedia/MediaWiki</li>
-      <li>Front-End Development: HTML; CSS/SASS/SCSS; JavaScript; Bootstrap; jQuery; Tailwind CSS</li>
-      <li>Back-End Development: Django Web Framework; Application Programming Interface (APIs), SQL</li>
-      <li>Identity and Access Management: Okta; EZProxy; Authelia; Nginx; Secure Web Application Gateway (SWAG)</li>
+      <li><span data-color="orange">Web Platforms:</span> Microsoft SharePoint; SpringShare CMS; WordPress; Wikipedia/MediaWiki</li>
+      <li><span data-color="orange">Front-End Development:</span> HTML; CSS/SASS/SCSS; JavaScript; Bootstrap; jQuery; Tailwind CSS</li>
+      <li><span data-color="orange">Back-End Development:</span> Django Web Framework; Application Programming Interface (APIs), SQL</li>
+      <li><span data-color="orange">Identity and Access Management:</span> Okta; EZProxy; Authelia; Nginx; Secure Web Application Gateway (SWAG)</li>
     </ul>
     <h3>Leadership and program/project management</h3>
     <ul>
-      <li>Project Management: Waterfall Project Management; Agile Project Management</li>
-      <li>Workflow/Process Automation: Python; Windows PowerShell; OpenRefine; PowerQuery; PowerAutomate; SUSHI</li>
+      <li><span data-color="blue">Project Management:</span> Waterfall Project Management; Agile Project Management</li>
+      <li><span data-color="blue">Workflow/Process Automation:</span> Python; Windows PowerShell; OpenRefine; PowerQuery; PowerAutomate; SUSHI</li>
     </ul>
     <h3>Communication and collaboration</h3>
     <ul>
-      <li>Team Collaboration: Oral and Written Technical Communication; Team Building; Zoom; Slack; Microsoft Teams</li>
-      <li>Technical Communication: Technical Webinars; Process/Workflow Documentation; Change Management</li>
-      <li>Remote Work: Collaboration via Work from Home; Building Virtual Staff Spaces/Intranets; Virtual Engagement</li>
+      <li><span data-color="green">Team Collaboration:</span> Oral and Written Technical Communication; Team Building; Zoom; Slack; Microsoft Teams</li>
+      <li><span data-color="green">Technical Communication:</span> Technical Webinars; Process/Workflow Documentation; Change Management</li>
+      <li><span data-color="green">Remote Work:</span> Collaboration via Work from Home; Building Virtual Staff Spaces/Intranets; Virtual Engagement</li>
     </ul>
   </section>
 
-  <section>
+  <section id="projects">
     <h2>Projects</h2>
     <ul>
-      <li><a href="https://github.com/J-Nistler/quant_magnetic_media">2019 – A Quantitative Approach to the Magnetic Media Crisis</a>: Git, HTML, Markdown, R Markdown, Quantitative/Qualitative Research Methods</li>
-      <li><a href="https://bit.ly/Iraq-StoryMap">2019 – Iraq in European Newspaper Editorials 1991–2013</a>: Gale Digital Scholarship Lab, Voyant, Text Mining, Primary Research, Data Analysis</li>
-      <li><a href="https://github.com/J-Nistler/AVST-Database-Application">2018 – Audio Visual Survey Tool (AVST)</a>: Microsoft Access, Visual Basic, SQL</li>
+      <li><a href="https://github.com/J-Nistler/quant_magnetic_media">2019 – A Quantitative Approach to the Magnetic Media Crisis</a> — <span data-color="white">Skills used: Git, HTML, Markdown, R Markdown, Quantitative/Qualitative Research Methods</span></li>
+      <li><a href="https://bit.ly/Iraq-StoryMap">2019 – Iraq in European Newspaper Editorials 1991–2013</a> — <span data-color="white">Skills used: Gale Digital Scholarship Lab, Voyant, Text Mining, Primary Research, Data Analysis</span></li>
+      <li><a href="https://github.com/J-Nistler/AVST-Database-Application">2018 – Audio Visual Survey Tool (AVST)</a> — <span data-color="white">Skills used: Microsoft Access, Visual Basic, SQL</span></li>
     </ul>
   </section>
 
-  <section>
+  <section id="publications">
     <h2>Publications</h2>
     <ul>
-      <li>Nistler, Jared and Ketchley, Sarah. “Developing Literacies in the Digital Humanities Classroom: A Case Study.” <cite>Literacies in a Digital Humanities Context</cite>, special issue of dh+lib, 2020, pp. 24–31.</li>
-      <li>Nistler, Jared. “No One Needs to Know My War Stories.” <cite>Undergraduate Journal of Contemporary Issues and Media</cite>, vol. 3, 2021, pp. 38–42.</li>
+      <li>2020 – Nistler, Jared and Ketchley, Sarah. “Developing Literacies in the Digital Humanities Classroom: A Case Study.” <cite>Literacies in a Digital Humanities Context</cite>, special issue of dh+lib, 2020, pp. 24–31.</li>
+      <li>2018 – Nistler, Jared. “No One Needs to Know My War Stories.” <cite>Undergraduate Journal of Contemporary Issues and Media</cite>, vol. 3, 2021, pp. 38–42. (Written in 2018, published in 2021.)</li>
     </ul>
   </section>
 

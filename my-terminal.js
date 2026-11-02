@@ -9,102 +9,46 @@ const formatter = new Intl.ListFormat('en', {
   type: 'conjunction',
 });
 
-const directories = {
-    education: [
-        '',
-        '<white>education</white>',
-        '* Certified Full Stack Web Developer <orange> PDX Code Guild (Bootcamp)</orange> 2021',
-        '* Master of Library and Information Science (MLIS) <purple>University of Washington</purple> 2018-2020',
-        '* Bachelor of International Studies <red>University of Utah</red> 2016-2018',
-        '* Associate of Arts in Arabic <green>Defense Language Institute Foreign Language Center</green> 2010-2012',
-        ''
-    ],
-    experience: [
-        '',
-        '<white>experience</white>',
-        '* Senior Systems Librarian / Systems Program Manager <yellow>U.S. Department of State</yellow> 2021-Present',
-        '* Electronic Resources Librarian / Content Management Systems Librarian <yellow>Northern Virginia Community College</yellow> 2019-2021',
-        '* Reference and Instruction Librarian <yellow>Northern Virginia Community College</yellow> 2019',
-        '* Archives Intern <yellow>Special Collections Research Center, George Mason University</yellow> 2019',
-        '* Research Liaison <yellow>United States Department of Agriculture, Forest Service</yellow> 2019',
-        '* Project Archivist <yellow>University of Utah, J. Willard Marriott Library</yellow> 2018',
-        '* Preservation & Digital Access Technician <yellow>University of Utah, J. Willard Marriott Library</yellow> 2016-2017',
-        '* Operation Manager/Analyst, Signals Intelligence <yellow>United States Army, Signals Intelligence/Arabic Crypto-Linguistics</yellow> 2010-2016',
-        ''
-    ],
-    projects: [
-        '',
-        '<white>projects</white>',
-        [
-            ['2019 - A Quantitative Approach to the Magnetic Media Crisis',
-             'https://github.com/J-Nistler/quant_magnetic_media',
-             'Skills used: Git, HTML, Markdown, R Markdown, Quantitative/Qualitative Research Methods'
-            ],
-            ['2019 - Iraq in European Newspaper Editorials 1991-2013',
-                'https://bit.ly/Iraq-StoryMap', 
-                'Skills used: Gale Digital Scholarship Lab, Voyant, Text Mining, Primary Research, Data Analysis'
-            ],
-            ['2018 - Audio Visual Survey Tool (AVST)',
-                'https://github.com/J-Nistler/AVST-Database-Application', 
-                'Skills used: Microsoft Access, Visual Basic, SQL'
-            ]
-        ].map(([name, url, description = '']) => {
-            return `* <a href="${url}">${name}</a> &mdash; <white>${description}</white>`;
-        }),
-        ''
-    ].flat(),
-    skills: [
-        '',
-        '<white>Library Systems Management and Administration</white>',
-        [
-            '<yellow>Integrated Library Systems(ILS):</yellow> OCLC WorldShare Management System (WMS); Ex Libris Alma/Primo',
-            '<yellow>Customer Relationship Management (CRM):</yellow> Salesforce – Library Support Application Administrator',
-            '<yellow>Content Management System (CMS):</yellow> SpringShare Suite (LibGuides, LibWizard, LibCal, etc.); Confluence',
-            '<yellow>Digital Asset Management Systems (DAM):</yellow> Omeka Classic; OCLC ContentDM',
-            '<yellow>System Migrations:</yellow> Elimination of Technical Debt; ContentDM to Omeka; Wiki to OneNote; Local to Cloud'
-        ],
-        '',
-        '<white>Library Web Administration and Knowledge Management</white>',
-        [
-            '<orange>Web Platforms:</orange> Microsoft SharePoint; SpringShare CMS; WordPress; Wikipedia/MediaWiki',
-            '<orange>Front-End Development:</orange> HTML; CSS/SASS/SCSS; JavaScript; Bootstrap; jQuery; Tailwind CSS',
-            '<orange>Back-End Development:</orange> Django Web Framework; Application Programming Interface (APIs), SQL',
-            '<orange>Identity and Access Management:</orange> Okta; EZProxy; Authelia; Nginx; Secure Web Application Gateway (SWAG)'
-        ],
-        '',
-        '<white>Leadership and Program/Project Management</white>',
-        [
-            '<blue>Project Management:</blue> Waterfall Project Management; Agile Project Management',
-            '<blue>Workflow/Process Automation:</blue> Python; Windows PowerShell; OpenRefine; PowerQuery; PowerAutomate; SUSHI'
-        ],
-        '',
-        '<white>Communication and Collaboration</white>',
-        [
-            '<green>Team Collaboration:</green> Oral and Written Technical Communication; Team Building; Zoom; Slack; Microsoft Teams',
-            '<green>Technical Communication:</green> Technical Webinars; Process/Workflow Documentation; Change Management',
-            '<green>Remote Work:</green> Collaboration via Work from Home; Building Virtual Staff Spaces/Intranets; Virtual Engagement'
-        ],
-        ''
-    ].flat(),
-    publications: [
-        '',
-        '<white>publications</white>',
-        '* 2020 - Nistler, Jared and Ketchley, Sarah. “Developing Literacies in the Digital Humanities Classroom: A Case Study.”',
-        'Literacies in a Digital Humanities Context, special issue of dh+lib, 2020, pp. 24-31.',
-        '* 2018 - Nistler, Jared. “No One Needs to Know My War Stories.”',
-        'Undergraduate Journal of Contemporary Issues and Media, vol. 3, 2021, pp. 38-42. (written in 2018, published in 2021).',
-        ''
-    ],
-    awards: [
-        '',
-        '<white>awards</white>',
-        '* 2025 – Superior Honor Award, U.S. Department of State',
-        '* 2025 – 2024 Federal Librarian of the Year, Library of Congress via FEDLINK',
-        '* 2024 – Superior Honor Award, U.S. Department of State',
-        '* 2023 – Meritorious Honor Award, U.S. Department of State',
-        ''
-    ],
-};
+// Content comes from the <main id="profile"> markup in index.html, so it
+// only has to be edited in one place. Each <section id> becomes a directory.
+const profile = document.getElementById('profile');
+const full_name = profile.querySelector('h1').textContent.trim();
+const tagline = profile.querySelector('header p').textContent.trim();
+
+// convert an HTML node into jQuery Terminal markup
+function to_terminal(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+        return $.terminal.escape_brackets(node.textContent.replace(/\s+/g, ' '));
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+        return '';
+    }
+    const inner = [...node.childNodes].map(to_terminal).join('');
+    if (node.tagName === 'A') {
+        return `<a href="${node.href}">${inner}</a>`;
+    }
+    const color = node.dataset.color;
+    return color ? `<${color}>${inner}</${color}>` : inner;
+}
+
+const directories = Object.fromEntries(
+    [...profile.querySelectorAll('section[id]')].map(section => {
+        const lines = [''];
+        for (const el of section.children) {
+            if (el.tagName === 'H2') {
+                lines.push(`<white>${section.id}</white>`);
+            } else if (el.tagName === 'H3') {
+                lines.push('', `<white>${to_terminal(el).trim()}</white>`);
+            } else if (el.tagName === 'UL') {
+                for (const li of el.children) {
+                    lines.push(`* ${to_terminal(li).trim()}`);
+                }
+            }
+        }
+        lines.push('');
+        return [section.id, lines];
+    })
+);
 
 const dirs = Object.keys(directories);
 
@@ -294,8 +238,8 @@ term.on('click', '.directory', function() {
 
 function ready() {
     const seed = rand(256);
-    term.echo('<white>Systems Librarian | Full Stack Web Developer | Open Source Software Advocate</white>\n').resume()
-        .echo(() => rainbow(render('Jared Nistler'), seed))
+    term.echo(`<white>${$.terminal.escape_brackets(tagline)}</white>\n`).resume()
+        .echo(() => rainbow(render(full_name), seed))
         .echo('')
         .echo('');
 }
